@@ -78,7 +78,7 @@
 </header>
 <nav id="indice"></nav>
 <p class="hint">Tocá cualquier foto para verla completa. Con la ✕ marcás las que no te gustan.</p>
-<div id="barra"><button onclick="copiarMarcadas()">Copiar marcadas (<span id="nmarcadas">0</span>)</button> <span id="aviso"></span></div>
+<div id="barra"><button onclick="copiarMarcadas()">Copiar IDs para borrar (<span id="nmarcadas">0</span> marcadas)</button> <span id="aviso"></span></div>
 
 <main id="rooms"></main>
 
@@ -228,14 +228,6 @@ document.getElementById("rooms").innerHTML = AMBIENTES.map(a => `
   <section class="room" id="${slug(a.nombre)}">
     <h2>${a.nombre}</h2>
     <div class="meta">${a.nota || "&nbsp;"}</div>
-    ${a.antes.length && a.render.length ? `
-    <h3>Antes / Render — deslizá para comparar</h3>
-    <div class="compara">
-      <img src="${thumb(a.render[0])}" alt="${a.nombre} — render" loading="lazy">
-      <img class="top" src="${thumb(a.antes[0])}" alt="${a.nombre} — antes" loading="lazy">
-      <span class="tag antes">Antes</span><span class="tag render">Render</span>
-      <div class="handle"></div>
-    </div>` : ""}
     ${SLOTS.map(([key,label]) => a[key].length
       ? `<h3>${label}</h3><div class="grid">${a[key].map(id => fig(id, a.nombre+" — "+label)).join("")}</div>`
       : `<h3>${label} — <span class="pend">pendiente</span></h3>`
@@ -247,16 +239,6 @@ document.getElementById("indice").innerHTML =
   AMBIENTES.map(a => `<a href="#${slug(a.nombre)}">${a.nombre}</a>`).join("") +
   `<a href="#planos">Planos</a>`;
 
-// Comparador antes/render
-document.querySelectorAll(".compara").forEach(c => {
-  const mover = e => {
-    const r = c.getBoundingClientRect();
-    const x = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
-    c.style.setProperty("--x", (x * 100).toFixed(2) + "%");
-  };
-  c.addEventListener("pointerdown", e => { c.setPointerCapture(e.pointerId); mover(e); });
-  c.addEventListener("pointermove", e => { if (e.buttons) mover(e); });
-});
 
 // Lightbox
 const lb = document.getElementById("lb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption");
@@ -311,7 +293,7 @@ function copiarMarcadas() {
     .map(([k,v]) => `${v} (id: ${k.slice(4)})`).join("\n");
   navigator.clipboard.writeText(lista || "(ninguna marcada)").then(() => {
     const aviso = document.getElementById("aviso");
-    aviso.textContent = "¡Copiado! Pegáselo a Claude en el chat.";
+    aviso.textContent = "¡Copiado! Pegame los IDs en el chat y los borro.";
     setTimeout(() => aviso.textContent = "", 3000);
   });
 }
