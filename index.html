@@ -211,10 +211,7 @@ document.getElementById("rooms").innerHTML = AMBIENTES.map(a => `
   <section class="room" id="${slug(a.nombre)}">
     <h2>${a.nombre}</h2>
     <div class="meta">${a.nota || "&nbsp;"}</div>
-    ${SLOTS.map(([key,label]) => a[key].length
-      ? `<div class="grid">${a[key].map(id => fig(id, a.nombre+" — "+label)).join("")}</div>`
-      : ``
-    ).join("")}
+    <div class="grid">${SLOTS.flatMap(([key,label]) => a[key].map(id => fig(id, a.nombre+" — "+label))).join("")}</div>
   </section>`).join("");
 
 // Índice de ambientes
