@@ -26,7 +26,8 @@
   .room .meta { color:var(--muted); font-size:.9rem; margin-bottom:18px; }
   h3 { color:var(--muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; margin:18px 0 8px; }
   h3 .pend { text-transform:none; letter-spacing:normal; font-style:italic; }
-  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  @media(max-width:600px){ .grid { grid-template-columns:1fr; } }
   figure { margin:0; position:relative; }
   figure img { width:100%; border-radius:10px; display:block; aspect-ratio:4/3; object-fit:cover; background:#2a241f;
                transition:opacity .15s; cursor:zoom-in; }
