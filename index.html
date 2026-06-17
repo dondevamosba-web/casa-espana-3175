@@ -64,7 +64,7 @@
 </header>
 <nav id="indice"></nav>
 <p class="hint">Tocá cualquier foto para verla completa. Con la ✕ marcás las que no te gustan.</p>
-<div id="barra"><button onclick="copiarMarcadas()">Copiar IDs para borrar (<span id="nmarcadas">0</span> marcadas)</button> <span id="aviso"></span></div>
+<div id="barra"><button onclick="copiarMarcadas()">Copiar IDs para borrar (<span id="nmarcadas">0</span> marcadas)</button> <button onclick="desmarcarTodas()" style="margin-left:8px;background:#444;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-family:inherit;font-size:.95rem;cursor:pointer">Desmarcar todas</button> <span id="aviso"></span></div>
 
 <main id="rooms"></main>
 
@@ -282,6 +282,11 @@ function copiarMarcadas() {
     aviso.textContent = "¡Copiado! Pegame los IDs en el chat y los borro.";
     setTimeout(() => aviso.textContent = "", 3000);
   });
+}
+function desmarcarTodas() {
+  Object.keys(localStorage).filter(k => k.startsWith("del_")).forEach(k => localStorage.removeItem(k));
+  document.querySelectorAll("figure.marcada").forEach(f => f.classList.remove("marcada"));
+  actualizarBarra();
 }
 // restaurar marcas guardadas
 document.querySelectorAll("figure[data-id]").forEach(f => {
