@@ -26,7 +26,7 @@
   .room .meta { color:var(--muted); font-size:.9rem; margin-bottom:18px; }
   h3 { color:var(--muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; margin:18px 0 8px; }
   h3 .pend { text-transform:none; letter-spacing:normal; font-style:italic; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(380px,1fr)); gap:14px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
   figure { margin:0; position:relative; }
   figure img { width:100%; border-radius:10px; display:block; aspect-ratio:4/3; object-fit:cover; background:#2a241f;
                transition:opacity .15s; cursor:zoom-in; }
@@ -58,10 +58,6 @@
 </style>
 </head>
 <body>
-<header>
-  <h1>España 3175 · Olavarría</h1>
-  <p>La remodelación, ambiente por ambiente</p>
-</header>
 <nav id="indice"></nav>
 <p class="hint">Tocá cualquier foto para verla completa. Con la ✕ marcás las que no te gustan.</p>
 <div id="barra"><button onclick="copiarMarcadas()">Copiar IDs para borrar (<span id="nmarcadas">0</span> marcadas)</button> <button onclick="desmarcarTodas()" style="margin-left:8px;background:#444;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-family:inherit;font-size:.95rem;cursor:pointer">Desmarcar todas</button> <span id="aviso"></span></div>
@@ -160,7 +156,7 @@ const AMBIENTES = [
   { nombre: "Living", nota: "6,00 × 4,66 m — ventana de 3,13 m",
     antes:  ["1Yv5l38hv3aYIWkvyrG9N-8SVkMFIJmKp","1TQDjsXeXERwwCfkdsBP8wdiueGpdzaqT"],
     render: ["living-render-v2_01","living-render-v3_01"],
-    despues: ["ventana-nueva_01","persiana-nueva_01","ventana-vieja_01","ventana-vieja_02","ventana-vieja_03","persiana-vieja_01"] },
+    despues: [] },
   { nombre: "Cocina y comedor", nota: "Incluye la vista a la ventana",
     antes:  ["1B0amNkLpmfYntea59aiESHZEMcLfu_db"],
     render: ["kitchen-v2_render_01","1SVIULallKMN8KNUJQ1V4rtAjrGM6FTGM","1HSvOLkrbGfgR-_MHsNfREquZ0XYoplm7"],
