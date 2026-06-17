@@ -43,20 +43,6 @@
   figure.marcada img { opacity:.35; outline:3px solid #c0392b; outline-offset:-3px; }
   figure.marcada .mark { background:#c0392b; }
 
-  /* Comparador antes/render */
-  .compara { position:relative; border-radius:10px; overflow:hidden; aspect-ratio:4/3; margin-bottom:18px;
-             touch-action:none; user-select:none; -webkit-user-select:none; max-width:700px; }
-  .compara img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; }
-  .compara .top { clip-path:inset(0 calc(100% - var(--x,50%)) 0 0); }
-  .compara .handle { position:absolute; top:0; bottom:0; left:var(--x,50%); width:2px; background:#fff;
-                     transform:translateX(-1px); }
-  .compara .handle::after { content:"◂ ▸"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-                            background:var(--accent); color:#14110f; border-radius:999px; padding:6px 10px;
-                            font-size:.8rem; white-space:nowrap; }
-  .compara .tag { position:absolute; top:10px; background:rgba(0,0,0,.55); color:#fff; font-size:.75rem;
-                  letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:6px; }
-  .compara .tag.antes { left:10px; }
-  .compara .tag.render { right:10px; }
 
   /* Lightbox */
   #lb { position:fixed; inset:0; background:rgba(0,0,0,.92); display:none; z-index:10;
@@ -172,35 +158,35 @@
 // Cada ambiente: antes / render / despues son listas de IDs. Cada ID es img/{id}.jpg (+ img/thumb/{id}.jpg).
 const AMBIENTES = [
   { nombre: "Living", nota: "6,00 × 4,66 m — ventana de 3,13 m",
-    antes:  ["1_74nj-vC_GclHE-LeiGpIgV0yR-LZ4Yi","1NzwxaWB8bME_j9aCHcAtwZ2j01r3YKbV","1Yv5l38hv3aYIWkvyrG9N-8SVkMFIJmKp","1TQDjsXeXERwwCfkdsBP8wdiueGpdzaqT"],
+    antes:  ["1Yv5l38hv3aYIWkvyrG9N-8SVkMFIJmKp","1TQDjsXeXERwwCfkdsBP8wdiueGpdzaqT"],
     render: ["1ycOPKpcCGfT1zCebvkzfFbfuVDXnnDbO","1j_tXPtbWCAbyWKjF2K_h_ySfty9Ozujt"],
     despues: [] },
   { nombre: "Cocina y comedor", nota: "Incluye la vista a la ventana",
-    antes:  ["17biJGYaVQ00_LHvU6CuIFjsCVUCtbbC1","1B0amNkLpmfYntea59aiESHZEMcLfu_db","1yYX641QZEbByAptaj18MRR5TzVuHApZY","15-TT5vOk88iDJ-I4VlMjNqCAA3lzooGJ"],
-    render: ["kitchen-v2_render_01","18dysMjlVzLVSknb2-qYl42JZDSdHLADA","1SVIULallKMN8KNUJQ1V4rtAjrGM6FTGM","1HSvOLkrbGfgR-_MHsNfREquZ0XYoplm7"],
+    antes:  ["1B0amNkLpmfYntea59aiESHZEMcLfu_db","1yYX641QZEbByAptaj18MRR5TzVuHApZY"],
+    render: ["kitchen-v2_render_01","1SVIULallKMN8KNUJQ1V4rtAjrGM6FTGM","1HSvOLkrbGfgR-_MHsNfREquZ0XYoplm7"],
     despues: [] },
   { nombre: "Baño 1", nota: "Se mantienen los azulejos verdes",
-    antes:  ["1vtxrs8J15Dnutxn7IOFnfttcEjQiFOFc","1khoOK_PS7ZojQ1WPSArC9x0-aWi_ZA4O","bathroom-1_03"],
+    antes:  ["bathroom-1_03"],
     render: ["10TSS-yepj_5Ys3lE3d_DaOeBKjkzum00","1uByu9acJtJPdb2yvumAde1uv3bCNn7Fv"],
     despues: [] },
   { nombre: "Baño 2", nota: "",
-    antes:  ["1rau4gU6iPvpR61hPaElVXlmAjAd3eWSI","1ammMnzBvq4x_Ar5Xxw7MRScI9pzHUCOI","bathroom-2_03"],
+    antes:  ["1rau4gU6iPvpR61hPaElVXlmAjAd3eWSI","bathroom-2_03"],
     render: ["1sp-AwqS1xslPv-8zz24rqyNVw4fSUTQ1"],
     despues: [] },
   { nombre: "Dormitorio 1 (principal)", nota: "3,50 × 4,00 m — da al balcón del frente",
-    antes:  ["1ZlM2p5Vf5VSxfl1lQEVJv3wfbOcTcFyg","1BitDCrrPOsUGtieH830YagQZ6Ph-H4uF"],
+    antes:  ["1ZlM2p5Vf5VSxfl1lQEVJv3wfbOcTcFyg"],
     render: ["1UY28sVzEwVZ02UQxbUorIVObxIlsosbZ"],
     despues: [] },
   { nombre: "Dormitorio 2", nota: "3,45 × 3,60 m — ventanal de 2,10 m, da al patio, al lado de la cocina",
-    antes:  ["1OurIzOhqFDXsoCm_jOg2hK5HSwR_3pHO","17yUgUMXB-DnnSba11vnraGZxNCblAYIb","1QAL2tlO96NFti2wtH_Y8_bxZb0JsBrbq"],
+    antes:  ["1OurIzOhqFDXsoCm_jOg2hK5HSwR_3pHO","17yUgUMXB-DnnSba11vnraGZxNCblAYIb"],
     render: ["1UvWsQONye_YuO7aMcCRlfQcgmKyh0SBV"],
     despues: [] },
   { nombre: "Terraza y pérgola", nota: "Parrilla nueva",
     antes:  ["1YW0e9OZ0feKSC85oPKoHsTyNVri8Mqow","1F64QmA8UJUrI0QNrUBcd4-04RYmHNtH-"],
-    render: ["1QFknnNQM-mAkp1EyOWwynuvo8zYQyvuz","1xc7TnQB2yIaNGRi4mMqhayFmdv8i3Bx1","17TcdcpMsDqFMs12cpLpLPLGXSY56PyzP","1KJqqpg-6dAPd7IJydT4ROz09ae3wSv_U","1wQbTzxpgBj2zto3x5k7tskDDqufuchUk"],
+    render: ["1xc7TnQB2yIaNGRi4mMqhayFmdv8i3Bx1","1KJqqpg-6dAPd7IJydT4ROz09ae3wSv_U","1wQbTzxpgBj2zto3x5k7tskDDqufuchUk"],
     despues: [] },
   { nombre: "Jardín", nota: "",
-    antes:  ["15hsf97SHX84kEbFkfD-XlfblDUo651Z_","1lWgmHRw55Re6rOM5qHBXzN4GNXH8LSHC","1wHaJdBqTp0ee6les9frpJUQsSIjCnQc8"],
+    antes:  ["15hsf97SHX84kEbFkfD-XlfblDUo651Z_","1lWgmHRw55Re6rOM5qHBXzN4GNXH8LSHC"],
     render: ["1YjlwideILf_yKgEbmZfJVDGo4RpInF8k"],
     despues: [] },
   { nombre: "Garage y escalera", nota: "Garage de 2,30 m de ancho — sigue siendo garage; revisar humedad del techo",
