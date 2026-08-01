@@ -59,6 +59,28 @@
 </style>
 </head>
 <body>
+<header>
+  <h1>España 3175</h1>
+  <p>Olavarría — antes, renders y avances, ambiente por ambiente</p>
+</header>
+
+<section class="room" id="plano-ilustrado">
+  <h2>Plano ilustrado</h2>
+  <div class="meta">Planta completa + detalle de garage/taller</div>
+  <div class="grid" style="grid-template-columns:1fr 1fr;">
+    <figure style="cursor:default;">
+      <img src="img/planos-nuevos/planta-ilustrada.jpg" alt="Plano ilustrado de la casa"
+           style="aspect-ratio:auto;object-fit:contain;background:#fff;cursor:zoom-in;"
+           onclick="window.open(this.src,'_blank')">
+    </figure>
+    <figure style="cursor:default;">
+      <img src="img/planos-nuevos/garage-taller.webp" alt="Detalle garage y taller de bicicletas"
+           style="aspect-ratio:auto;object-fit:contain;background:#fff;cursor:zoom-in;"
+           onclick="window.open(this.src,'_blank')">
+    </figure>
+  </div>
+</section>
+
 <nav id="indice"></nav>
 <p class="hint">Tocá cualquier foto para verla completa. Con la ✕ marcás las que no te gustan.</p>
 <div id="barra"><button onclick="copiarMarcadas()">Copiar IDs para borrar (<span id="nmarcadas">0</span> marcadas)</button> <button onclick="desmarcarTodas()" style="margin-left:8px;background:#444;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-family:inherit;font-size:.95rem;cursor:pointer">Desmarcar todas</button> <span id="aviso"></span></div>
@@ -212,6 +234,7 @@ document.getElementById("rooms").innerHTML = AMBIENTES.map(a => `
 
 // Índice de ambientes
 document.getElementById("indice").innerHTML =
+  `<a href="#plano-ilustrado">Plano ilustrado</a>` +
   AMBIENTES.map(a => `<a href="#${slug(a.nombre)}">${a.nombre}</a>`).join("") +
   `<a href="#planos">Planos</a>`;
 
